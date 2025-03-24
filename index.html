@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rotina-niveis</title>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="loginForm" class="form-container">
+      <h2>Login</h2>
+      <input type="email" id="email" placeholder="Email" required />
+      <input type="password" id="password" placeholder="Senha" required />
+      <button id="loginBtn">Login</button>
+      <p id="loginError"></p>
+    </div>
+
+    <div id="profileContainer" class="profile-container">
+      <h2>Perfil</h2>
+      <h3>Solicitações de Amizade</h3>
+      <div id="friendsRequest"></div>
+      <p id="userEmail"></p>
+      <button id="logoutBtn">Logout</button>
+
+      <div>
+        <input type="text" id="searchInput" placeholder="Digite o nickname" />
+        <button onclick="searchUser()">Buscar</button>
+      </div>
+      <div id="searchResults"></div>
+    </div>
+
+  </body>
+</html>
