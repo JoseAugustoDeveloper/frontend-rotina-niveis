@@ -91,10 +91,19 @@ function displaySearchResults(user) {
     `;
   searchResults.appendChild(userDiv);
 }
+// function getAuthToken() {
+//   const cookies = document.cookie.split(';');
+//   const authToken = cookies.find(cookie => cookie.startsWith('auth_token='));
+//     if (authToken) {
+//       return tokenCookie.split('=')[1];
+//   }
+//   return null;
+// }
 
-async function sendFriendRequest(nickname, isPrivate) {
+async function sendFriendRequest(nickname, isPrivate) {  
+  // const token = getAuthToken();
   try {
-
+     
     console.log("Enviando solicitação para:", nickname, "Perfil privado?", isPrivate);
     
     const response = await fetch("http://localhost:3000/user/add-friend", {
