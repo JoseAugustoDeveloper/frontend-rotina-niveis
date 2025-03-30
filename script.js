@@ -57,8 +57,9 @@ async function searchUser(){
    const response = await fetch(`http://localhost:3000/user/search?nickname=${nickname}`, {
     method: 'GET',
     headers: {
-      "content-type": "application/json",
-    }
+      "content-type": "application/json"
+    },
+    credentials: 'include'
    });
    
    const data = await response.json();
@@ -91,17 +92,9 @@ function displaySearchResults(user) {
     `;
   searchResults.appendChild(userDiv);
 }
-// function getAuthToken() {
-//   const cookies = document.cookie.split(';');
-//   const authToken = cookies.find(cookie => cookie.startsWith('auth_token='));
-//     if (authToken) {
-//       return tokenCookie.split('=')[1];
-//   }
-//   return null;
-// }
 
 async function sendFriendRequest(nickname, isPrivate) {  
-  // const token = getAuthToken();
+ 
   try {
      
     console.log("Enviando solicitação para:", nickname, "Perfil privado?", isPrivate);
@@ -180,6 +173,7 @@ async function accpetFriend(friendId) {
         "content-type": "application/json"
       },
       body: JSON.stringify({ friendId }),
+      credentials: "include" // Usar token para autenticação
     });
 
     const data = await response.json();
