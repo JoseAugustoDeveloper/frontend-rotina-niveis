@@ -4,12 +4,12 @@ import "./App.css";
 function App() {
 
   const [user, setUser] = useState({ nivel: 1, pontos: 0 });
-  // const [atividades, setAtividades] = useState([]);
+  const [atividades, setAtividades] = useState([]);
   const [amigos, setAmigos] = useState([]);
 
   useEffect(() => {
     fetchPerfil();
-    // fetchAtividades();
+    fetchAtividades();
     fetchAmigos();
   }, []);
 
@@ -29,21 +29,21 @@ function App() {
     }
   }
 
-  // async function fetchAtividades() {
-  //   try {
-  //     const response = await fetch("http://localhost:3000/user/activities", {
-  //       method: "GET",
-  //       headers: {
-  //         "Content-Type": "application/json"
-  //       },
-  //       credentials: 'include'
-  //     })
-  //     const data = await response.json();
-  //     setAtividades(data);
-  //   } catch (error) {
-  //     console.error("Erro ao buscar atividades", error);
-  //   }
-  // }
+  async function fetchAtividades() {
+    try {
+      const response = await fetch("http://localhost:3000/user/activities", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        credentials: 'include'
+      })
+      const data = await response.json();
+      setAtividades(data);
+    } catch (error) {
+      console.error("Erro ao buscar atividades", error);
+    }
+  }
 
   async function fetchAmigos() {
     try {
@@ -86,9 +86,9 @@ function App() {
         <div className="long-box top-left">
           <h1>Atividades recentes</h1>
           <ul>
-            {/* {atividades.map(atividade => (
+            {atividades.map(atividade => (
               <li key={atividade._id}>{atividade.name} - {atividade.points} pontos</li>
-            ))} */}
+            ))}
           </ul>
         </div>
        
