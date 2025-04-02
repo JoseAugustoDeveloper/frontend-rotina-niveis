@@ -1,15 +1,18 @@
 import "./style.css";
 import { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 
 function Register(){
-  const [isActive, setIsActive] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const [isActive, setIsActive] = useState(false); 
 
   async function registerUser(username, email, password){
     const response = await fetch("http://localhost:3000/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, email, password }),
+      body: JSON.stringify({ nickname: username, email, password }),
       credentials: 'include'
     });
 
@@ -17,18 +20,41 @@ function Register(){
     console.log("Resposta do servidor:", data);
   };
 
-  async function loginUser(email, password){
-    const response = await fetch("http://localhost:3000/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-      credentials: 'include'
-    });
-
-    const data = await response.json();
-    console.log("Resposta do servidor:", data);
-  };
-
+  async function loginUser(event){
+    event.preventDefault()
+    try {
+      const response = await fetch('http://localhost:3000/login',{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          password
+        }),
+        credentials: 'include' // Usar token para autenticação
+      })
+  
+      const data = await response.json();
+      console.log("Resposta do servidor:", data); // LOG PARA VER RESPOSTA
+      
+      if (response.ok) {
+        console.log("Login bem sucedido!")
+        navigate("/home")
+      } else {
+        document.getElementById('loginError').textContent = data.message;
+        console.error("Erro no login:", data.message);
+      }
+    } catch (error) {
+      console.error('Erro ao fazer login:', error)
+    }
+  }
+  // async function showProfile(user) {
+  //   document.getElementById('loginForm').style.display = 'none';
+  //   document.getElementById('profileContainer').style.display = 'block';
+  //   document.getElementById('userEmail').textContent = `Email: ${user.email}`;
+  // }
+  
 //   async function getProfile() {
 //     const response = await fetch("http://localhost:3000/profile", {
 //       method: "GET",
@@ -54,22 +80,16 @@ function Register(){
      <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"></link>
     <div className={`container ${isActive ? "active" : ""}`}>
     <div className="form-box login">
-      <form onSubmit={async (e)=>{
-        e.preventDefault();
-        const email = e.target[0].value;
-        const password = e.target[1].value;
-        const result = await loginUser(email, password);
-        console.log(result);
-      }}>
+      <form onSubmit={loginUser}>
         <h1>Login</h1>
 
         <div className="input-box">
-          <input type="text" placeholder="Nome de Usuário" required />
+          <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
           <i className="bx bxs-user"></i>
         </div>
 
         <div className="input-box">
-          <input type="password" placeholder="Senha" required />
+          <input type="password" placeholder="Senha" value={password} onChange={(e) => setPassword(e.target.value)} required />
           <i className="bx bxs-lock-alt"></i>
         </div>
 
@@ -77,7 +97,7 @@ function Register(){
           <a href="#">Esqueceu a senha?</a>
         </div>
 
-        <button type="submit" class="btn">
+        <button type="submit" className="btn">
           Login
         </button>
         <p>ou faça login com plataformas sociais</p>
