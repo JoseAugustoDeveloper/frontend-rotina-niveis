@@ -1,0 +1,200 @@
+/* Fundo principal */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #060b23, #1a1a40, #2b2d42, #3d348b, #210b61);
+  background-size: 400% 400%;
+  animation: spaceGradient 12s ease infinite;
+  overflow: hidden;
+}
+
+@keyframes spaceGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Criando as estrelas */
+.stars {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background: transparent;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.stars::after,
+.stars::before {
+  content: "";
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(white, transparent);
+  background-size: 2px 2px;
+  opacity: 0.8;
+  animation: moveStars 50s linear infinite;
+}
+
+.stars::before {
+  animation-duration: 60s;
+}
+
+@keyframes moveStars {
+  from { transform: translateY(0); }
+  to { transform: translateY(-100%); }
+}
+
+.bem-vindo{
+  width: 527px; 
+  height: 44px; 
+  left: 260px; 
+  top: 20px; 
+  position: absolute;
+  color: white; 
+  font-size: 36px; 
+  font-family: JetBrains Mono; 
+  font-weight: 800; 
+  word-wrap: break-word
+}
+
+/* Painel lateral */
+.side-panel {
+  width: 15.6vw;
+  height: 97vh;
+  position: absolute;
+  left: 1.87vw;
+  top: 1.56vh;
+  background: linear-gradient(180deg, #4900AE 0%, #41009D 9%, #310076 29%, black 92%);
+  border-radius: 1.39vw;
+}
+
+button {
+  background-color: #0069d9;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Caixa pequena */
+.small-box {
+  width: 15.2vw;
+  height: 28.4vh;
+  position: absolute;
+  left: 19.8vw;
+  top: 16vh;
+  background: #340871;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 1.39vw;
+}
+
+.perfil {
+  width: 62px; 
+  height: 21px; 
+  left: 10px; 
+  top: 0px; 
+  position: absolute; 
+  color: white; 
+  font-size: 16px; 
+  font-family: JetBrains Mono; 
+  font-weight: 800; 
+  word-wrap: break-word
+}
+
+/* Caixa média */
+.medium-box {
+  width: 32.7vw;
+  height: 28.4vh;
+  position: absolute;
+  left: 36.3vw;
+  top: 16vh;
+  background: #1F0446;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 1.39vw;
+  border: 0.07vw solid black;
+}
+
+.estatisticas{
+  width: 120px; 
+  height: 23px; 
+  left: 10px; 
+  top: 0px; 
+  position: absolute; 
+  color: white; 
+  font-size: 16px; 
+  font-family: JetBrains Mono; 
+  font-weight: 800; 
+  word-wrap: break-word"
+}
+
+
+/* Caixas grandes */
+.long-box {
+  width: 15.2vw;
+  height: 43.2vh;
+  position: absolute;
+  background: linear-gradient(180deg, #1F0446 0%, black 100%);
+  border-radius: 1.39vw;
+}
+
+.adicionar-amigos-btn{
+  width: 59px; 
+  height: 57px; 
+  left: 1131px; 
+  top: 169px;
+  border-radius: 9999px;
+  background: radial-gradient(ellipse 50.00% 50.00% at 50.00% 50.00%, #6A00FF 0%, black 100%);
+}
+
+.top-left { left: 19.8vw; top: 50vh; }
+.top-center { left: 36.3vw; top: 50vh; }
+.top-right { left: 53.7vw; top: 50vh; }
+
+/* Caixa maior */
+.large-box {
+  width: 25.4vw;
+  height: 81.5vh;
+  position: absolute;
+  left: 72.8vw;
+  top: 16vh;
+  background: linear-gradient(180deg, #1F0446 0%, black 100%);
+  border-radius: 1.39vw;
+}
+
+.responsive-button {
+  width: 11.9vw;
+  height: 4.7vh;
+  position: absolute;
+  left: 86.2vw;
+  top: 9vh;
+  background: linear-gradient(90deg, #D9D9D9 0%, #737373 100%);
+  border-radius: 1.39vw;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2vw;
+  font-weight: bold;
+  color: black;
+}
+
+.responsive-button2 {
+  width: 11.9vw;
+  height: 4.7vh;
+  position: absolute;
+  left: 72.8vw;
+  top: 9vh;
+  background: #1f0446;
+  border-radius: 1.39vw;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2vw;
+  font-weight: bold;
+  color: black;
+}

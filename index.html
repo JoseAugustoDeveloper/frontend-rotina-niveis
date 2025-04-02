@@ -6,29 +6,100 @@
     <title>Rotina-niveis</title>
     <script src="script.js" defer></script>
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+
   </head>
   <body>
-    <div id="loginForm" class="form-container">
-      <h2>Login</h2>
-      <input type="email" id="email" placeholder="Email" required />
-      <input type="password" id="password" placeholder="Senha" required />
-      <button id="loginBtn">Login</button>
-      <p id="loginError"></p>
-    </div>
-
-    <div id="profileContainer" class="profile-container">
-      <h2>Perfil</h2>
-      <h3>Solicitações de Amizade</h3>
-      <div id="friendsRequest"></div>
-      <p id="userEmail"></p>
-      <button id="logoutBtn">Logout</button>
-
-      <div>
-        <input type="text" id="searchInput" placeholder="Digite o nickname" />
-        <button onclick="searchUser()">Buscar</button>
+    <div class="container">
+      <div className="stars"></div>
+      <div class="form-box login">
+        <form action="#">
+          <h1>Login</h1>
+  
+          <div class="input-box">
+            <input type="text" placeholder="Nome de Usuário" required />
+            <i class="bx bxs-user"></i>
+          </div>
+  
+          <div class="input-box">
+            <input type="password" placeholder="Senha" required />
+            <i class="bx bxs-lock-alt"></i>
+          </div>
+  
+          <div class="forgot-link">
+            <a href="#">Forgot Password?</a>
+          </div>
+  
+          <button type="submit" class="btn">
+            Login
+          </button>
+          <p>or login with social plataforms</p>
+  
+          <div class="social-icons">
+            <a href="#">
+              <i class="bx bxl-google"></i>
+            </a>
+            <a href="#">
+              <i class="bx bxl-facebook"></i>
+            </a>
+            <a href="#">
+              <i class="bx bxl-github"></i>
+            </a>
+            <a href="#">
+              <i class="bx bxl-linkedin"></i>
+            </a>
+          </div>
+        </form>
       </div>
-      <div id="searchResults"></div>
+  
+      <div class="form-box register">
+        <form action="#">
+          <h1>Register</h1>
+          <div class="input-box">
+            <input type="text" placeholder="Nome de Usuário" required />
+            <i class="bx bxs-user"></i>
+          </div>
+          <div class="input-box">
+            <input type="email" placeholder="Email" required />
+            <i class="bx bxs-envelope"></i>
+          </div>
+          <div class="input-box">
+            <input type="password" placeholder="Senha" required />
+            <i class="bx bxs-lock-alt"></i>
+          </div>
+          <button type="submit" class="btn">Register</button>
+          <p>or register with social plataforms</p>
+          <div class="social-icons">
+            <a href="#">
+              <i class="bx bxl-google"></i>
+            </a>
+            <a href="#">
+              <i class="bx bxl-facebook"></i>
+            </a>
+            <a href="#">
+              <i class="bx bxl-github"></i>
+            </a>
+            <a href="#">
+              <i class="bx bxl-linkedin"></i>
+            </a>
+          </div>
+        </form>
+      </div>
+  
+      <div class="toggle-box">
+        <div class="toggle-panel toggle-left">
+          <h1>Olá, Bem Vindo!</h1>
+          <p>Registre-se para começar a usar nosso sistema.</p>
+          <button class="btn register-btn">Register</button>
+        </div>
+        
+        <div class="toggle-panel toggle-right">
+          <h1>Olá, Bem Vindo!</h1>
+          <p>Faça login para começar a usar nosso sistema.</p>
+          <button class="btn login-btn">Login</button>
+        </div>
+  
+      </div>
     </div>
-
   </body>
 </html>
