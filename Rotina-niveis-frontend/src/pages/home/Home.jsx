@@ -2,15 +2,15 @@ import { useEffect, useState } from "react";
 import "./App.css";
 
 function App() {
-  const [user, setUser] = useState({ nivel: 1, pontos: 0 });
-  const [atividades, setAtividades] = useState([]);
+  const [user, setUser] = useState({ level: 1, pontos: 0 });
+  const [setAtividades] = useState([]);
   const [amigos, setAmigos] = useState([]);
 
   useEffect(() => {
     fetchPerfil();
     fetchAtividades();
     fetchAmigos();
-  }, []);
+  }, );
 
   async function fetchPerfil() {
     try {
@@ -22,7 +22,8 @@ function App() {
         credentials: "include",
       });
       const data = await response.json();
-      setUser({ nivel: data.level, pontos: data.points });
+      console.log("Dados do perfil", data)
+      setUser({ level: data.user.level, pontos: data.user.points });
     } catch (error) {
       console.error("Erro ao buscar perfil", error);
     }
@@ -53,31 +54,39 @@ function App() {
         },
         credentials: "include",
       });
-      const data = await response.json();
-      setAmigos(data);
+      const friends = await response.json();
+      setAmigos(friends.map(f => ({
+        id: f.id,
+        nickname: f.nickname,
+        level: f.level,
+        points: f.points,
+      })));
     } catch (error) {
       console.error("Erro ao buscar amigos", error);
     }
   }
   return (
     <>
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"></link>
       <div className="background">
-        <h1 className="bem-vindo">Bem vindo, </h1>
+        <h1 className="bem-vindo">Bem vindo, Mihawk </h1>
 
-        <div className="side-panel">
+        <div className="container-menu">
           <h1>Menu</h1>
-          <button id="notificacoes-btn">Notificações</button>
+          <button id="notificacoes-btn">
+            <i className="bx bxs-arrow-from-left"></i>
+            Notificações</button>
           <button id="configuracoes-btn">Configurações</button>
           <button id="acessar-perfil-btn">Acessar Perfil Completo</button>
         </div>
 
-        <div className="small-box">
+        <div className="container-perfil">
           <h1 className="perfil">Perfil</h1>
           <br />
           <br />
           <br />
         <div>
-        <strong>Nível:</strong> {user.nivel}
+        <strong>Nível:</strong> {user.level}
         <br />  
         <br />
         <strong>Pontos:</strong> {user.pontos}
@@ -86,62 +95,46 @@ function App() {
           
         </div>
 
-        <div className="medium-box">
+        <div className="container-estatisticas">
           <h1 className="estatisticas">Estatisticas</h1>
           <canvas id="grafico-progresso"></canvas>
         </div>
 
-        <div className="long-box top-left">
-          <div>Nome da atividade</div>
+        <div className="recent-activities">
+  {setAtividades.length > 0 ? (
+    setAtividades.slice(0, 3).map((atividade, index) => (
+      <div key={atividade._id} className={`container-recentes ${index === 0 ? "top-left" : index === 1 ? "top-center" : "top-right"}`}>
+        <div>{atividade.name}</div>
+        <br />
+        <div>
+          Categoria: {atividade.category}
           <br />
-          <div>
-            Categoria: 
-            <br />
-            <br />
-            Pontos:
-            <br />
-            <br />
-            Data:
-          </div>
-          <ul>
-            {atividades.map((atividade) => (
-              <li key={atividade._id}>
-                {atividade.name} - {atividade.points} pontos
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="long-box top-center">
-          <div>Nome da atividade</div>
           <br />
-          <div>
-            Categoria: 
-            <br />
-            <br />
-            Pontos:
-            <br />
-            <br />
-            Data:
-          </div>
-        </div>
-
-        <div className="long-box top-right">
-          <div>Nome da atividade</div>
+          Pontos: {atividade.points}
           <br />
-          <div>
-            Categoria: 
-            <br />
-            <br />
-            Pontos:
-            <br />
-            <br />
-            Data:
-          </div>
+          <br />
+          Data: {new Date(atividade.date).toLocaleDateString()}
         </div>
+      </div>
+    ))
+  ) : (
+    <>
+      <div className="container-recentes top-left">
+        <div>Sem atividade recente</div>
+      </div>
+      <div className="container-recentes top-center">
+        <div>Sem atividade recente</div>
+      </div>
+      <div className="container-recentes top-right">
+        <div>Sem atividade recente</div>
+      </div>
+    </>
+  )}
+</div>
 
-        <div className="large-box">
-          <button className="adicionar-amigos-btn"></button>
+        <div className="container-amigos">
+          <button className="adicionar-amigos-btn">+</button>
+          <h1>Amigos</h1>
           <ul id="amigos-lista">
             {amigos.map((amigo) => (
               <li key={amigo._id}>{amigo.nickname}</li>
@@ -149,8 +142,7 @@ function App() {
           </ul>
         </div>
 
-        <button className="responsive-button">Clique Aqui</button>
-        <button className="responsive-button2">Clique Aqui</button>
+        <button className="responsive-button2">Nova Atividate</button>
       </div>
     </>
   );

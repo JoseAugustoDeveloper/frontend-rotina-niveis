@@ -61,7 +61,7 @@ body {
 }
 
 /* Painel lateral */
-.side-panel {
+.container-menu {
   width: 15.6vw;
   height: 97vh;
   position: absolute;
@@ -85,7 +85,7 @@ button:hover {
 }
 
 /* Caixa pequena */
-.small-box {
+.container-perfil {
   width: 15.2vw;
   height: 28.4vh;
   position: absolute;
@@ -110,7 +110,7 @@ button:hover {
 }
 
 /* Caixa média */
-.medium-box {
+.container-estatisticas {
   width: 32.7vw;
   height: 28.4vh;
   position: absolute;
@@ -137,7 +137,7 @@ button:hover {
 
 
 /* Caixas grandes */
-.long-box {
+.container-recentes {
   width: 15.2vw;
   height: 43.2vh;
   position: absolute;
@@ -159,7 +159,7 @@ button:hover {
 .top-right { left: 53.7vw; top: 50vh; }
 
 /* Caixa maior */
-.large-box {
+.container-amigos {
   width: 25.4vw;
   height: 81.5vh;
   position: absolute;
