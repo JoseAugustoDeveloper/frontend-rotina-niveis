@@ -10,7 +10,7 @@ function App() {
     fetchPerfil();
     fetchAtividades();
     fetchAmigos();
-  }, );
+  }, [] );
 
   async function fetchPerfil() {
     try {
