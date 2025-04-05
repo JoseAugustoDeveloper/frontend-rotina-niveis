@@ -14,7 +14,7 @@ function App() {
 
   async function fetchPerfil() {
     try {
-      const response = await fetch("http://localhost:3000/user/profile", {
+      const response = await fetch("http://localhost:3000/user/perfil", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
