@@ -3,7 +3,7 @@ import "./App.css";
 
 function App() {
   const [user, setUser] = useState({ level: 1, pontos: 0 });
-  const [setAtividades] = useState([]);
+  const [atividade, setAtividades] = useState([]);
   const [amigos, setAmigos] = useState([]);
 
   useEffect(() => {
@@ -23,7 +23,7 @@ function App() {
       });
       const data = await response.json();
       console.log("Dados do perfil", data)
-      setUser({ level: data.user.level, pontos: data.user.points });
+      setUser({ nickname: data.user.nickname, level: data.user.level, pontos: data.user.points });
     } catch (error) {
       console.error("Erro ao buscar perfil", error);
     }
@@ -69,7 +69,7 @@ function App() {
     <>
     <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"></link>
       <div className="background">
-        <h1 className="bem-vindo">Bem vindo, Mihawk </h1>
+        <h1 className="bem-vindo">Bem vindo, {user.nickname} </h1>
 
         <div className="container-menu">
           <h1>Menu</h1>
@@ -81,19 +81,16 @@ function App() {
         </div>
 
         <div className="container-perfil">
-          <h1 className="perfil">Perfil</h1>
-          <br />
-          <br />
-          <br />
-        <div>
-        <strong>Nível:</strong> {user.level}
-        <br />  
-        <br />
-        <strong>Pontos:</strong> {user.pontos}
-        </div>
-           
-          
-        </div>
+  <h1 className="perfil">Perfil</h1>
+  <div className="perfil-info">
+    <img src="/img/perfil.jpeg" alt="Foto de Perfil" className="perfil-img" />
+    <div className="perfil-detalhes">
+      <strong>Nível:</strong> {user.level}
+      <br />
+      <strong>Pontos:</strong> {user.pontos}
+    </div>
+  </div>
+</div>
 
         <div className="container-estatisticas">
           <h1 className="estatisticas">Estatisticas</h1>
@@ -101,35 +98,31 @@ function App() {
         </div>
 
         <div className="recent-activities">
-  {setAtividades.length > 0 ? (
-    setAtividades.slice(0, 3).map((atividade, index) => (
-      <div key={atividade._id} className={`container-recentes ${index === 0 ? "top-left" : index === 1 ? "top-center" : "top-right"}`}>
-        <div>{atividade.name}</div>
-        <br />
-        <div>
-          Categoria: {atividade.category}
-          <br />
-          <br />
-          Pontos: {atividade.points}
-          <br />
-          <br />
-          Data: {new Date(atividade.date).toLocaleDateString()}
-        </div>
+  {Array.from({ length: 3 }).map((_, index) => {
+    const atividadeAtual = atividade[index]; // Pega a atividade correspondente
+
+    return (
+      <div
+        key={index}
+        className={`container-recentes ${
+          index === 0 ? "top-left" : index === 1 ? "top-center" : "top-right"
+        }`}
+      >
+        {atividadeAtual ? (
+          <>
+            <h3 className="title">{atividadeAtual.name}</h3>
+            <div className="info">
+              <p><strong>Classe:</strong> {atividadeAtual.classe}</p>
+              <p><strong>Pontos:</strong> {atividadeAtual.points}</p>
+              <p><strong>Data:</strong> {new Date(atividadeAtual.date).toLocaleDateString()}</p>
+            </div>
+          </>
+        ) : (
+          <p className="no-activities">Nenhuma atividade recente.</p>
+        )}
       </div>
-    ))
-  ) : (
-    <>
-      <div className="container-recentes top-left">
-        <div>Sem atividade recente</div>
-      </div>
-      <div className="container-recentes top-center">
-        <div>Sem atividade recente</div>
-      </div>
-      <div className="container-recentes top-right">
-        <div>Sem atividade recente</div>
-      </div>
-    </>
-  )}
+    );
+  })}
 </div>
 
         <div className="container-amigos">

@@ -48,7 +48,7 @@ body {
 }
 
 .bem-vindo{
-  width: 527px; 
+  width: 5270px; 
   height: 44px; 
   left: 260px; 
   top: 20px; 
@@ -94,20 +94,45 @@ button:hover {
   background: #340871;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 1.39vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-family: JetBrains Mono;
 }
 
 .perfil {
-  width: 62px; 
-  height: 21px; 
-  left: 10px; 
-  top: 0px; 
-  position: absolute; 
-  color: white; 
-  font-size: 16px; 
-  font-family: JetBrains Mono; 
-  font-weight: 800; 
-  word-wrap: break-word
+  font-size: 18px;
+  font-weight: 800;
+  margin-bottom: 10px;
 }
+
+.perfil-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+}
+
+.perfil-img {
+  width: 5vw;
+  height: 5vw;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid white;
+}
+
+.perfil-detalhes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.perfil-detalhes strong {
+  font-size: 14px;
+}
+
 
 /* Caixa média */
 .container-estatisticas {
@@ -137,12 +162,96 @@ button:hover {
 
 
 /* Caixas grandes */
+/* .container-recentes {
+  width: 15.2vw;
+  height: 43.2vh;
+  position: absolute;
+  background: linear-gradient(180deg, #1F0446 0%, black 100%);
+  border-radius: 1.39vw;
+}
+
+.title{
+  width: 100px; 
+  height: 25px; 
+  left: 10px; 
+  top: 0px; 
+  position: absolute; 
+  color: white; 
+  font-size: 16px; 
+  font-family: JetBrains Mono; 
+  font-weight: 800; 
+  word-wrap: break-word
+}
+.recent-activities {
+  justify-content: start;
+  align-content: center;
+  width: 62px; 
+  height: 21px; 
+  left: 10px;  
+  color: white; 
+  font-size: 16px; 
+  font-family: JetBrains Mono; 
+  font-weight: 800; 
+  word-wrap: break-word
+} */
+
+.recent-activities {
+  min-height: 60vh; /* Garante espaço suficiente para os containers */
+}
+
 .container-recentes {
   width: 15.2vw;
   height: 43.2vh;
   position: absolute;
   background: linear-gradient(180deg, #1F0446 0%, black 100%);
   border-radius: 1.39vw;
+  padding: 15px;
+  color: white;
+  box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.container-recentes:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(255, 255, 255, 0.2);
+}
+
+.title {
+  font-size: 18px;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.info {
+  font-size: 14px;
+  font-family: 'JetBrains Mono', monospace;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.no-activities {
+  color: #ccc;
+  font-size: 16px;
+  font-style: italic;
+}
+
+/* Posições dos containers */
+.top-left {
+  left: 19.8vw;
+  top: 50vh;
+}
+
+.top-center {
+  left: 36.3vw;
+  top: 50vh;
+}
+
+.top-right {
+  left: 53.7vw;
+  top: 50vh;
 }
 
 .adicionar-amigos-btn{
@@ -153,10 +262,6 @@ button:hover {
   border-radius: 9999px;
   background: radial-gradient(ellipse 50.00% 50.00% at 50.00% 50.00%, #6A00FF 0%, black 100%);
 }
-
-.top-left { left: 19.8vw; top: 50vh; }
-.top-center { left: 36.3vw; top: 50vh; }
-.top-right { left: 53.7vw; top: 50vh; }
 
 /* Caixa maior */
 .container-amigos {
