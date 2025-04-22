@@ -105,15 +105,7 @@ function App() {
         credentials: "include",
       });
       const friends = await response.json();
-<<<<<<< HEAD
-      console.log("Amigos recebidos:", friends)
-      setAmigos(friends.map(f => ({
-        id: f.id,
-        nickname: f.nickname,
-        level: f.level,
-        points: f.points,
-      })));
-=======
+
       setAmigos(
         friends.map((f) => ({
           id: f.id,
@@ -122,7 +114,6 @@ function App() {
           points: f.points,
         }))
       );
->>>>>>> fde1f824e20fcdb974014d3d319ace59cbf543e2
     } catch (error) {
       console.error("Erro ao buscar amigos", error);
     }
@@ -130,18 +121,11 @@ function App() {
 
   return (
     <>
-<<<<<<< HEAD
-    <link rel="preconnect" href="https://fonts.googleapis.com"></link>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin></link>
-<link href="https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Hand:wght@400..700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Oxygen:wght@300;400;700&display=swap" rel="stylesheet">
-</link>
-    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"></link>
-=======
       <link
         rel="stylesheet"
         href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       ></link>
->>>>>>> fde1f824e20fcdb974014d3d319ace59cbf543e2
+
       <div className="background">
         <h1 className="bem-vindo">Bem vindo, {user.nickname}👋 </h1>
 
@@ -193,14 +177,10 @@ function App() {
         </div>
 
         <div className="container-estatisticas">
-<<<<<<< HEAD
-          <h1>Estatisticas</h1>
-          <h2>Ver tudo</h2>
-          
-=======
+
           <h1 className="estatisticas">Estatísticas</h1>
           <canvas id="grafico-progresso"></canvas>
->>>>>>> fde1f824e20fcdb974014d3d319ace59cbf543e2
+
         </div>
 
         <div className="recent-activities">
