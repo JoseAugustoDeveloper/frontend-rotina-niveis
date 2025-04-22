@@ -133,6 +133,39 @@ button:hover {
   font-size: 14px;
 }
 
+.perfil-img-wrapper {
+  position: relative;
+  cursor: pointer;
+}
+
+.perfil-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.perfil-menu button {
+  background: none;
+  border: none;
+  padding: 5px 10px;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.perfil-menu button:hover {
+  background-color: #f0f0f0;
+}
+
+
 
 /* Caixa média */
 .container-estatisticas {
