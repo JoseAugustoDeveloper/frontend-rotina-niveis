@@ -2,6 +2,23 @@ import { useEffect, useRef, useState } from "react";
 import "./App.css";
 
 function App() {
+  const atividadesPorClasse = {
+    Saúde: ["Tomar remédio", "Consulta médica", "Beber 2L de água"],
+    "Atividade Física": ["Correr", "Alongamento", "Musculação", "Yoga"],
+    Lazer: ["Assistir série", "Ler livro", "Jogar videogame"],
+    Esporte: ["Jogar futebol", "Basquete", "Nadar", "Pedalar"],
+    "Trabalho/Estudo": [
+      "Estudar JavaScript",
+      "Trabalhar no projeto",
+      "Fazer prova",
+    ],
+    "Casa/Organização": ["Lavar louça", "Arrumar o quarto", "Fazer compras"],
+  };
+
+  const [modalAtividadeAberto, setModalAtividadeAberto] = useState(false);
+  const [classeSelecionada, setClasseSelecionada] = useState("");
+  const [atividadeSelecionada, setAtividadeSelecionada] = useState("");
+
   const [user, setUser] = useState({ nickname: "", level: 1, pontos: 0 });
   const [atividade, setAtividades] = useState([]);
   const [amigos, setAmigos] = useState([]);
@@ -10,6 +27,9 @@ function App() {
   const fileInputRef = useRef();
 
   useEffect(() => {
+    setModalAtividadeAberto(false);
+    setClasseSelecionada("");
+    setAtividadeSelecionada("");
     fetchPerfil();
     fetchAtividades();
     fetchAmigos();
@@ -89,7 +109,11 @@ function App() {
         credentials: "include",
       });
       const data = await response.json();
-      setAtividades(data);
+
+      const atividadesOrdenadas = data
+        .sort((a, b) => new Date(b.date) - new Date(a.date))
+        .slice(0, 3);
+      setAtividades(atividadesOrdenadas);
     } catch (error) {
       console.error("Erro ao buscar atividades", error);
     }
@@ -116,6 +140,34 @@ function App() {
       );
     } catch (error) {
       console.error("Erro ao buscar amigos", error);
+    }
+  }
+
+  async function cadastrarAtividade() {
+    if (!classeSelecionada || !atividadeSelecionada)
+      return alert("Selecione uma classe e uma atividade!");
+
+    try {
+      const response = await fetch("http://localhost:3000/user/activities-add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          classe: classeSelecionada,
+          name: atividadeSelecionada,
+        }),
+      });
+
+      if (!response.ok) throw new Error("Erro ao cadastrar");
+
+      setModalAtividadeAberto(false);
+      setClasseSelecionada("");
+      setAtividadeSelecionada("");
+      fetchAtividades(); // Atualiza as atividades
+    } catch (err) {
+      console.error("Erro ao cadastrar atividade:", err);
     }
   }
 
@@ -177,10 +229,8 @@ function App() {
         </div>
 
         <div className="container-estatisticas">
-
           <h1 className="estatisticas">Estatísticas</h1>
           <canvas id="grafico-progresso"></canvas>
-
         </div>
 
         <div className="recent-activities">
@@ -231,7 +281,51 @@ function App() {
           </ul>
         </div>
 
-        <button className="responsive-button2">Nova Atividade</button>
+        {modalAtividadeAberto && (
+          <div className="modal-flutuante">
+            <h2>Adicionar Nova Atividade</h2>
+            <label>Classe:</label>
+            <select
+              value={classeSelecionada}
+              onChange={(e) => setClasseSelecionada(e.target.value)}
+            >
+              <option value="">Selecione uma classe</option>
+              {Object.keys(atividadesPorClasse).map((classe) => (
+                <option key={classe} value={classe}>
+                  {classe}
+                </option>
+              ))}
+            </select>
+
+            <label>Atividade:</label>
+            <select
+              value={atividadeSelecionada}
+              onChange={(e) => setAtividadeSelecionada(e.target.value)}
+              disabled={!classeSelecionada}
+            >
+              <option value="">Selecione uma atividade</option>
+              {classeSelecionada &&
+                atividadesPorClasse[classeSelecionada].map((atividade) => (
+                  <option key={atividade} value={atividade}>
+                    {atividade}
+                  </option>
+                ))}
+            </select>
+
+            <div className="botoes-modal">
+              <button onClick={cadastrarAtividade}>Cadastrar</button>
+              <button onClick={() => setModalAtividadeAberto(false)}>
+                Cancelar
+              </button>
+            </div>
+          </div>
+        )}
+        <button
+          className="responsive-button2"
+          onClick={() => setModalAtividadeAberto(true)}
+        >
+          Nova Atividade
+        </button>
       </div>
     </>
   );

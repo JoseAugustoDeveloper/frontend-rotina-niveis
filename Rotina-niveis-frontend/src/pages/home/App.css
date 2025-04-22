@@ -403,3 +403,31 @@ button:hover {
   font-weight: bold;
   color: black;
 }
+.modal-flutuante {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  background-color: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+  z-index: 999;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modal-flutuante select,
+.modal-flutuante button {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.botoes-modal {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
