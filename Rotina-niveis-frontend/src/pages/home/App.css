@@ -1,3 +1,6 @@
+:root{
+  font-family: jetbrains-mono;
+}
 /* Fundo principal */
 body {
   display: flex;
@@ -254,13 +257,18 @@ button:hover {
   top: 50vh;
 }
 
-.adicionar-amigos-btn{
-  width: 59px; 
-  height: 57px; 
-  left: 1131px; 
-  top: 169px;
-  border-radius: 9999px;
+.adicionar-amigos-btn {
+  width: 59px;
+  height: 57px;
+  border-radius: 50%;
   background: radial-gradient(ellipse 50.00% 50.00% at 50.00% 50.00%, #6A00FF 0%, black 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: white;
+  border: none;
+  cursor: pointer;
 }
 
 /* Caixa maior */
@@ -272,7 +280,66 @@ button:hover {
   top: 16vh;
   background: linear-gradient(180deg, #1F0446 0%, black 100%);
   border-radius: 1.39vw;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+
+.container-amigos h1{
+  color: white;
+}
+
+.amigos-stories {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  width: 100%;
+  padding: 10px;
+  justify-content: flex-start;
+}
+
+.story {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 70px;
+}
+
+.story-foto {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid #6A00FF;
+  object-fit: cover;
+}
+
+.story span {
+  font-size: 12px;
+  color: white;
+  margin-top: 5px;
+}
+
+.add-amigo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.adicionar-amigo-texto {
+  color: white;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 5px;
+}
+
+.sem-amigos {
+  color: gray;
+  text-align: center;
+}
+
 
 .responsive-button {
   width: 11.9vw;

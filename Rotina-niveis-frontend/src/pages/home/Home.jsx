@@ -55,6 +55,7 @@ function App() {
         credentials: "include",
       });
       const friends = await response.json();
+      console.log("Amigos recebidos:", friends)
       setAmigos(friends.map(f => ({
         id: f.id,
         nickname: f.nickname,
@@ -67,9 +68,13 @@ function App() {
   }
   return (
     <>
+    <link rel="preconnect" href="https://fonts.googleapis.com"></link>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin></link>
+<link href="https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Hand:wght@400..700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Oxygen:wght@300;400;700&display=swap" rel="stylesheet">
+</link>
     <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"></link>
       <div className="background">
-        <h1 className="bem-vindo">Bem vindo, {user.nickname} </h1>
+        <h1 className="bem-vindo">Bem vindo, {user.nickname}👋 </h1>
 
         <div className="container-menu">
           <h1>Menu</h1>
@@ -93,8 +98,9 @@ function App() {
 </div>
 
         <div className="container-estatisticas">
-          <h1 className="estatisticas">Estatisticas</h1>
-          <canvas id="grafico-progresso"></canvas>
+          <h1>Estatisticas</h1>
+          <h2>Ver tudo</h2>
+          
         </div>
 
         <div className="recent-activities">
@@ -127,10 +133,10 @@ function App() {
 
         <div className="container-amigos">
           <button className="adicionar-amigos-btn">+</button>
-          <h1>Amigos</h1>
+          <p className="adicionar-amigo-texto">Add Novo</p>
           <ul id="amigos-lista">
             {amigos.map((amigo) => (
-              <li key={amigo._id}>{amigo.nickname}</li>
+              <li key={amigo.id}>{amigo.nickname}</li>
             ))}
           </ul>
         </div>
