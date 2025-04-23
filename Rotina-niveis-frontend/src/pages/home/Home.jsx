@@ -147,6 +147,24 @@ function App() {
     if (!classeSelecionada || !atividadeSelecionada)
       return alert("Selecione uma classe e uma atividade!");
 
+    const classe = classeSelecionada.trim();
+    const classesValidas = ["Saúde", "Atividade Física", "Lazer", "Esporte", "Trabalho/Estudo", "Casa/Organização"];
+  
+    if (!classesValidas.includes(classe)) {
+      return alert("Classe inválida!");
+    }
+
+    const dados = {
+      name: atividadeSelecionada,
+      classe: classeSelecionada.trim(),
+      points: 10, // valor padrão — você pode ajustar isso
+      isRecurring: false,
+      date: new Date().toISOString(), // envia a data atual
+      description: `Atividade de ${classeSelecionada}`, // descrição genérica — pode melhorar isso depois
+    };
+
+    console.log("🔼 Enviando dados:", dados);
+
     try {
       const response = await fetch("http://localhost:3000/user/activities-add", {
         method: "POST",
@@ -154,10 +172,7 @@ function App() {
           "Content-Type": "application/json",
         },
         credentials: "include",
-        body: JSON.stringify({
-          classe: classeSelecionada,
-          name: atividadeSelecionada,
-        }),
+        body: JSON.stringify(dados),
       });
 
       if (!response.ok) throw new Error("Erro ao cadastrar");
